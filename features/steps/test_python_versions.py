@@ -4,6 +4,7 @@ import subprocess
 import re
 
 assertEqual = TestCase().assertEqual
+
 VERSION_MATCHER = re.compile('^Python ((\d+\.\d+)\.\d+)')
 
 use_step_matcher("re")
@@ -16,23 +17,24 @@ def run_docker_container(context, container_name: str) -> None:
 
 @step("I check if pip it's installed")
 def run_pip_to_see_if_it_is_installed(context):
-    output = subprocess.check_output(['docker', 'run', '-t', '--rm', 
-                        context.container_name, 
-                        'pip', '--version']) # type: bytes
-    context.docker_output = output.decode('utf-8')
+    run_docker_command(context, "which", "pip")
 
 
-@step("it's instaled in the container")
+def run_docker_command(context, *parameters):
+    program = ['docker', 'run', '-t', '--rm', context.container_name]
+    program.extend(parameters)
+    output = subprocess.check_output(program) # type: bytes
+    context.docker_output = output.decode('utf-8').strip()
+
+
+@step("it's instaled in the container in /python")
 def check_pip_version_name(context):
-    print(context.docker_output)
+    assertEqual(context.docker_output, "/python/bin/pip")
 
 
 @step("I get the version of the default python command")
 def get_python_version(context) -> None:
-    output = subprocess.check_output(['docker', 'run', '-t', '--rm', 
-                        context.container_name, 
-                        'python', '--version']) # type: bytes
-    context.docker_output = output.decode('utf-8')
+    run_docker_command(context, "python", "--version")
 
 
 @step("it is version '(.*)'")
