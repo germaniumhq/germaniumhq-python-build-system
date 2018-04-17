@@ -57,6 +57,26 @@ stage('Create Build Containers') {
         }
     }
 
+    jobs."Python 3.4 Build" = {
+        node {
+            deleteDir()
+            checkout scm
+
+            docker.build('germaniumhq/python-build:3.4',
+                         'python-3.4-build')
+        }
+    }
+
+    jobs."Python 3.5 Build" = {
+        node {
+            deleteDir()
+            checkout scm
+
+            docker.build('germaniumhq/python-build:3.5',
+                         'python-3.5-build')
+        }
+    }
+
     jobs."Python 3.6 Build" = {
         node {
             deleteDir()
