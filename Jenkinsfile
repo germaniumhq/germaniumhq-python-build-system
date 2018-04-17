@@ -4,44 +4,40 @@ stage('Create Run Containers') {
     parallelJobs."Python 2.7" = {
         node {
             deleteDir()
-
             checkout scm
 
-            dockerBuild file: 'python-2.7/Dockerfile',
-                tags: ['germaniumhq/python:2.7']
+            docker.build('germaniumhq/python:2.7',
+                         'python-2.7')
         }
     }
 
     parallelJobs."Python 3.4" = {
         node {
             deleteDir()
-
             checkout scm
 
-            dockerBuild file: 'python-3.4/Dockerfile',
-                tags: ['germaniumhq/python:3.4']
+            docker.build('germaniumhq/python:3.4',
+                         'python-3.4')
         }
     }
 
     parallelJobs."Python 3.5" = {
         node {
             deleteDir()
-
             checkout scm
 
-            dockerBuild file: 'python-3.5/Dockerfile',
-                tags: ['germaniumhq/python:3.5']
+            docker.build('germaniumhq/python:3.5',
+                         'python-3.5')
         }
     }
 
     parallelJobs."Python 3.6" = {
         node {
             deleteDir()
-
             checkout scm
 
-            dockerBuild file: 'python-3.6/Dockerfile',
-                tags: ['germaniumhq/python:3.6']
+            docker.build('germaniumhq/python:3.6',
+                         'python-3.6')
         }
     }
 
@@ -54,24 +50,23 @@ stage('Create Build Containers') {
     jobs."Python 2.7 Build" = {
         node {
             deleteDir()
-
             checkout scm
 
-            dockerBuild file: 'python-2.7-build/Dockerfile',
-                tags: ['germaniumhq/python-build:2.7']
+            docker.build('germaniumhq/python-build:2.7',
+                         'python-2.7-build')
         }
     }
 
     jobs."Python 3.6 Build" = {
         node {
             deleteDir()
-
             checkout scm
 
-            dockerBuild file: 'python-3.6-build/Dockerfile',
-                tags: ['germaniumhq/python-build:3.6']
+            docker.build('germaniumhq/python-build:3.6',
+                         'python-3.6-build')
         }
     }
 
     parallel(jobs)
 }
+

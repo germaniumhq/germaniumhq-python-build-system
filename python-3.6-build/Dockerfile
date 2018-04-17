@@ -2,8 +2,6 @@ FROM germaniumhq/python:3.6
 
 USER root
 
-# FIXME: move the pip conf in?
-#COPY settings.xml /m2/settings.xml
 COPY _gbs /_gbs/
 
 RUN chmod +x _gbs/start.sh && \
