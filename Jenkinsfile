@@ -87,6 +87,16 @@ stage('Create Build Containers') {
         }
     }
 
+    jobs."Python 3.6 Child Build" = {
+        node {
+            deleteDir()
+            checkout scm
+
+            docker.build('germaniumhq/python-build-child:3.6',
+                         'python-build-child-3.6')
+        }
+    }
+
     parallel(jobs)
 }
 

@@ -39,6 +39,5 @@ ONBUILD COPY --chown=germanium:germanium . /src
 #======================================
 # Do the actual build.
 #======================================
-ONBUILD CMD /_gbs/start.sh _gbs/build/run-build.sh
-
+ONBUILD RUN /_gbs/start.sh _gbs/build/run-build.sh
 
