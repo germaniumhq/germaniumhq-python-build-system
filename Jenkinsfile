@@ -41,6 +41,16 @@ stage('Create Run Containers') {
         }
     }
 
+    parallelJobs."Python 3.6 (Alpine)" = {
+        node {
+            deleteDir()
+            checkout scm
+
+            docker.build('germaniumhq/python-alpine:3.6',
+                         'python-alpine-3.6-build')
+        }
+    }
+
     parallel(parallelJobs)
 }
 
