@@ -5,7 +5,7 @@ RUN apt update -y && \
     apt install -y software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa -y && \
     apt update -y && \
-    apt install python3.4 python3.4-venv -y && \
+    apt install python3.4 python3.4-venv python3.4-dev binutils -y && \
     python3.4 -m ensurepip && \
     pip3.4 install virtualenv
 
