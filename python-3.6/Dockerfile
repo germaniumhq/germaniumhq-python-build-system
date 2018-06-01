@@ -27,7 +27,7 @@ USER germanium
 #============================================================================
 # Install pyinstaller, with no lsb
 #============================================================================
-ARG PYINSTALLER_TAG=v3.2.1
+ARG PYINSTALLER_TAG=v3.3.1
 
 # Build bootloader for alpine
 
