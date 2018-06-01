@@ -32,7 +32,7 @@ ARG PYINSTALLER_TAG=v3.3.1
 # Build bootloader for alpine
 
 RUN git clone https://github.com/pyinstaller/pyinstaller.git /tmp/pyinstaller \
-    && git checkout v3.2.1 && \
+    && git checkout v3.2.1 \
     && cp -R /tmp/pyinstaller/bootloader /tmp \
     && git checkout $PYINSTALLER_TAG \
     && rm -rf /tmp/pyinstaller/bootloader \
