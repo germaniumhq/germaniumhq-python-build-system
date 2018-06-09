@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 RUN apt update -y && \
     apt upgrade -y && \
-    apt install python python-pip python-dev binutils -y && \
+    apt install python python-pip python-dev binutils zlib1g -y && \
     pip install virtualenv
 
 RUN useradd -m germanium && \
