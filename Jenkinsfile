@@ -32,7 +32,7 @@ def runDockerPush = { imageName, folderName ->
 def runParallelBuilds = { imageMap, code ->
     def parallelJobs = [:]
 
-    imageMap.entrySet().forEach({e ->
+    imageMap.entrySet().each({e ->
         def image = e.key
         def folder = e.value
 
