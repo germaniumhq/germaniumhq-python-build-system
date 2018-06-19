@@ -5,7 +5,7 @@ RUN apt update -y && \
     apt install python python-pip python-dev binutils zlib1g -y && \
     pip install virtualenv
 
-RUN useradd -m germanium && \
+RUN useradd -m --home-dir /germanium germanium && \
     python -m virtualenv /python && \
     chown -R germanium:germanium /python
 

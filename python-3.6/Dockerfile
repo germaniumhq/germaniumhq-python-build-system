@@ -16,7 +16,7 @@ RUN apt update -y && \
     python3.6 -m ensurepip && \
     pip3.6 install virtualenv
 
-RUN useradd -m germanium && \
+RUN useradd -m --home-dir /germanium germanium && \
     python3.6 -m virtualenv /python && \
     chown -R germanium:germanium /python
 

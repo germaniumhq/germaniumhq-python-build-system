@@ -9,7 +9,7 @@ RUN apt update -y && \
     python3.4 -m ensurepip && \
     pip3.4 install virtualenv
 
-RUN useradd -m germanium && \
+RUN useradd -m --home-dir /germanium germanium && \
     python3.4 -m virtualenv /python && \
     chown -R germanium:germanium /python
 
