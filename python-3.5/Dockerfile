@@ -2,8 +2,14 @@ FROM ubuntu:16.04
 
 RUN apt update -y && \
     apt upgrade -y && \
-    apt install python3 python3-pip python3-dev binutils -y && \
-    pip3 install virtualenv
+    apt install python3 python3-pip python3-dev binutils locales -y && \
+    pip3 install virtualenv && \
+    locale-gen en_US.UTF-8 && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV LANG="en_US.UTF-8" \
+    LC_ALL="en_US.UTF-8" \
+    LC_LANG="en_US.UTF-8"
 
 RUN useradd -m --home-dir /germanium germanium && \
     python3 -m virtualenv /python && \
