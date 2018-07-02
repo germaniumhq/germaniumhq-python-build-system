@@ -25,11 +25,25 @@ def get_python_version(context) -> None:
     run_docker_command(context, "python --version")
 
 
-@step("I run in the container '(.*)'")
+@step("I run in the container ['\"](.*)['\"]")
 def run_docker_command(context, command: str):
     program = ['docker', 'run', '-t', '--rm', context.container_name]
-    program.extend(command.split(" "))
-    output = subprocess.check_output(program) # type: bytes
+
+    command_tokens = command.split("'")
+
+    odd = True
+    for command_token in command_tokens:
+        if odd:
+            # we break down parts of the command that is not between quotes,
+            # and we strip trailing spaces.
+            broken_down_token = filter(lambda it: it, command_token.split(" "))
+            program.extend(broken_down_token)
+        else:
+            program.append(command_token)
+
+        odd = not odd
+
+    output = subprocess.check_output(program)  # type: bytes
     context.docker_output = output.decode('utf-8').strip()
 
 

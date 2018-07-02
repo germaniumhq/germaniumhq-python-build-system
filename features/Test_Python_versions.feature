@@ -13,7 +13,7 @@ When I run in the container 'whoami'
 Then I get as output 'germanium'
 When I run in the container 'echo öäüșțăîâ'
 Then I get as output 'öäüșțăîâ'
-When I run in the container 'echo $HOME'
+When I run in the container "bash -c 'echo $HOME'"
 Then I get as output '/germanium'
 
 Scenario: Test python 3.4
@@ -28,7 +28,7 @@ When I run in the container 'whoami'
 Then I get as output 'germanium'
 When I run in the container 'echo öäüșțăîâ'
 Then I get as output 'öäüșțăîâ'
-When I run in the container 'echo $HOME'
+When I run in the container "bash -c 'echo $HOME'"
 Then I get as output '/germanium'
 
 Scenario: Test python 3.5
@@ -43,7 +43,7 @@ When I run in the container 'whoami'
 Then I get as output 'germanium'
 When I run in the container 'echo öäüșțăîâ'
 Then I get as output 'öäüșțăîâ'
-When I run in the container 'echo $HOME'
+When I run in the container "bash -c 'echo $HOME'"
 Then I get as output '/germanium'
 
 Scenario: Test python 3.6
@@ -58,5 +58,5 @@ When I run in the container 'whoami'
 Then I get as output 'germanium'
 When I run in the container 'echo öäüșțăîâ'
 Then I get as output 'öäüșțăîâ'
-When I run in the container 'echo $HOME'
+When I run in the container "bash -c 'echo $HOME'"
 Then I get as output '/germanium'
