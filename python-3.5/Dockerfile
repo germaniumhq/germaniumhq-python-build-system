@@ -2,9 +2,11 @@ FROM ubuntu:16.04
 
 RUN apt update -y && \
     apt upgrade -y && \
-    apt install python3 python3-pip python3-dev binutils locales -y && \
+    apt install -y locales && \
+    locale-gen en_US en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8 && \
+    apt install -y python3 python3-pip python3-dev binutils && \
     pip3 install virtualenv && \
-    locale-gen en_US.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
 
 ENV LANG="en_US.UTF-8" \
@@ -18,4 +20,7 @@ RUN useradd -m --home-dir /germanium germanium && \
 ENV PATH="/python/bin:$PATH"
 
 USER germanium
+
+RUN /python/bin/pip install -U pip && \
+    /python/bin/pip install -U wheel
 
