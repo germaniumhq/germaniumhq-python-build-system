@@ -1,5 +1,3 @@
-FROM germaniumhq/python:3.4
-
 USER root
 
 COPY _gbs /_gbs/
@@ -13,15 +11,13 @@ RUN chmod +x _gbs/start.sh && \
 #======================================
 # Install prerequisite software
 #======================================
-ONBUILD COPY --chown=germanium:germanium _gbs/build/install-software /src/_gbs/build/install-software
+ONBUILD COPY --chown=germanium:germanium  _gbs/build/install-software /src/_gbs/build/install-software
 ONBUILD RUN /_gbs/start.sh _gbs/build/install-software/install-software.sh
 
 #======================================
 # Prepare dependencies for download
 #======================================
 ONBUILD USER germanium
-
-ONBUILD COPY --chown=germanium:germanium --from=child-image /python /python
 
 # build1
 ONBUILD COPY --chown=germanium:germanium _gbs/build/prepare-build1 /src/_gbs/build/prepare-build1
