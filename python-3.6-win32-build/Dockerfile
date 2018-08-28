@@ -1,3 +1,5 @@
+FROM germaniumhq/python:3.6-win32
+
 USER root
 
 COPY _gbs /_gbs/
