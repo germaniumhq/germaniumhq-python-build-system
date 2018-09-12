@@ -38,24 +38,26 @@ RUN set -x \
     && while pgrep wineserver >/dev/null; do echo "Waiting for wineserver"; sleep 1; done \
     && rm -rf /tmp/.wine-*
 
-COPY override-dll.reg /germanium/override-dll.reg
+COPY override* /germanium/
 
 ENV W_TMP /tmp/wine-tmp
 
 # install Microsoft Visual C++ Redistributable for Visual Studio 2017 dll files
 RUN set -x \
     && rm -f "$W_TMP"/* \
-    && wget -P "$W_TMP" https://download.visualstudio.microsoft.com/download/pr/100349138/88b50ce70017bf10f2d56d60fcba6ab1/VC_redist.x86.exe \
-    && cabextract -q --directory="$W_TMP" "$W_TMP"/VC_redist.x86.exe \
+    && wget -P "$W_TMP" https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe \
+    && cabextract -q --directory="$W_TMP" "$W_TMP"/vc_redist.x86.exe \
     && cabextract -q --directory="$W_TMP" "$W_TMP/a10" \
     && cabextract -q --directory="$W_TMP" "$W_TMP/a11" \
     && cd "$W_TMP" \
     && rename 's/_/\-/g' *.dll \
     && cp *.dll $WINEPREFIX/drive_c/windows/system32/ \
-    && wine regedit /S /germanium/override-dll.reg
+    && cat /germanium/override-dll.reg >> /germanium/wine/user.reg \
+    && while pgrep wineserver >/dev/null; do echo "Waiting for wineserver"; sleep 1; done \
+    && rm -rf /tmp/.wine-*
 
 USER root
-RUN find / -name api-ms-win-core-path-l1-1-0.dll\* | xargs rm -f
+RUN chmod +x /germanium/override-dll.sh && /germanium/override-dll.sh
 
 USER germanium
 
