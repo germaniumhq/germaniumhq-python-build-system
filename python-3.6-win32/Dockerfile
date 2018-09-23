@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-RUN useradd -m -b / germanium
+RUN useradd -m --home-dir /germanium germanium
 
 ENV DEBIAN_FRONTEND noninteractive
 

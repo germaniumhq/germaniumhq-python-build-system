@@ -5,9 +5,18 @@ import re
 
 assertEqual = TestCase().assertEqual
 
-VERSION_MATCHER = re.compile('^Python ((\d+\.\d+)\.\d+)')
+VERSION_MATCHER = re.compile('^Python ((\d+\.\d+)\.\d+)\s.*')
+ANSI_CONTROL_CHARS_RE = re.compile(r'((\x9B|\x1B\[)[0-?]*[ -/]*[@-~])|(\x1B.)')
 
 use_step_matcher("re")
+
+
+def strip_ansi_control_chars(line: str) -> str:
+    """
+    Remove control characters such as colors, to make the parsing
+    of the text easier.
+    """
+    return ANSI_CONTROL_CHARS_RE.sub('', line)
 
 
 @step("I run the docker container for '(.*)'")
@@ -23,6 +32,11 @@ def check_expected_output(context, expected):
 @step("I get the version of the default python command")
 def get_python_version(context) -> None:
     run_docker_command(context, "python --version")
+
+
+@step("I get the version of the miniconda python command")
+def get_miniconda_python_version(context) -> None:
+    run_docker_command(context, "wine /germanium/wine/drive_c/Miniconda3/python.exe --version")
 
 
 @step("I run in the container ['\"](.*)['\"]")
@@ -43,15 +57,19 @@ def run_docker_command(context, command: str):
 
         odd = not odd
 
-    output = subprocess.check_output(program)  # type: bytes
-    context.docker_output = output.decode('utf-8').strip()
+    output: bytes = subprocess.check_output(program)
+    str_output: str = output.decode('utf-8')
+    str_output = strip_ansi_control_chars(str_output)
+    
+    context.docker_output = str_output.strip()
 
 
 @step("it is version '(.*)'")
 def check_python_version(context, container_name: str) -> None:
     m = VERSION_MATCHER.match(context.docker_output)
+
     if not m:
-        raise Exception("Unable to parse version from: %s" % context.docker_output)
+        raise Exception("Unable to parse version from: `%s`" % context.docker_output)
 
     context.python_version = m.group(2)
 
