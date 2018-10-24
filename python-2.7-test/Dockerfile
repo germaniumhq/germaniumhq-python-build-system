@@ -15,7 +15,9 @@ ONBUILD ARG GBS_PREFIX="/"
 # Install prerequisite software
 #======================================
 ONBUILD COPY --chown=germanium:germanium ${GBS_PREFIX}_gbs/build/install-software /src${GBS_PREFIX}_gbs/build/install-software
-ONBUILD RUN /_gbs/start.sh /src${GBS_PREFIX}_gbs/build/install-software/install-software.sh "INSTALL SOFTWARE"
+ONBUILD RUN /_gbs/start.sh /src${GBS_PREFIX}_gbs/build/install-software/install-software.sh "INSTALL SOFTWARE" && \
+    chown -R germanium:germanium /src
+
 
 #======================================
 # Prepare dependencies for download
