@@ -5,9 +5,13 @@ import subprocess
 
 FOLDERS = [
     "python-2.7-build",
+    "python-2.7-test",
     "python-3.4-build",
+    "python-3.4-test",
     "python-3.5-build",
+    "python-3.5-test",
     "python-3.6-build",
+    "python-3.6-test",
 ]
 CURRENT_FOLDER = pathlib.Path(__file__).resolve().parent.parent
 

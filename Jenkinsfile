@@ -12,6 +12,10 @@ def runImages = [
     "germaniumhq/python-build:3.4": "python-3.4-build",
     "germaniumhq/python-build:3.5": "python-3.5-build",
     "germaniumhq/python-build:3.6": "python-3.6-build",
+    "germaniumhq/python-test:2.7": "python-2.7-test",
+    "germaniumhq/python-test:3.4": "python-3.4-test",
+    "germaniumhq/python-test:3.5": "python-3.5-test",
+    "germaniumhq/python-test:3.6": "python-3.6-test",
     "germaniumhq/python-build:3.6-win32": "python-3.6-win32-build"
 ]
 
