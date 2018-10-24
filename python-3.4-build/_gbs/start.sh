@@ -2,13 +2,9 @@
 
 cd /src
 
-FILENAME="$1"
-
-while [[ "$FILENAME" != "/" && "$FILENAME" != "." ]]; do
-    chown germanium:germanium $FILENAME
-    FILENAME=$(dirname $FILENAME)
-done # [[ "$FILENAME" != "/" ]]
-
+echo '#############################################################################'
+echo "# $2"
+echo '#############################################################################'
 test -x $1 || chmod +x .$1
 
 $1

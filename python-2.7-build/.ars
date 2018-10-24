@@ -1,1 +1,1 @@
-{NAME: gbs-docker}
+{NAME: gbs/docker-build, arg0: 'germaniumhq/python:2.7', 'germaniumhq/python:2.7': true}
