@@ -41,7 +41,5 @@ ONBUILD RUN /_gbs/start.sh /src${GBS_PREFIX}_gbs/build/prepare-test/prepare-test
 # sources are copied only after the test stage
 ONBUILD COPY --chown=germanium:germanium . /src
 
-#======================================
-# Do the actual build.
-#======================================
-ONBUILD RUN /_gbs/start.sh /src${GBS_PREFIX}_gbs/build/run-test.sh "RUN TEST"
+# This container doesn't runs the tests, just prepares the container to run
+# them. The tests need to run in the Jenkins container.
