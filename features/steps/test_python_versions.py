@@ -5,7 +5,7 @@ import re
 
 assertEqual = TestCase().assertEqual
 
-VERSION_MATCHER = re.compile('^Python ((\d+\.\d+)\.\d+)\s.*')
+VERSION_MATCHER = re.compile(r'^Python ((\d+\.\d+)\.\d+)\s?.*$')
 ANSI_CONTROL_CHARS_RE = re.compile(r'((\x9B|\x1B\[)[0-?]*[ -/]*[@-~])|(\x1B.)')
 
 use_step_matcher("re")
@@ -60,7 +60,7 @@ def run_docker_command(context, command: str):
     output: bytes = subprocess.check_output(program)
     str_output: str = output.decode('utf-8')
     str_output = strip_ansi_control_chars(str_output)
-    
+
     context.docker_output = str_output.strip()
 
 
