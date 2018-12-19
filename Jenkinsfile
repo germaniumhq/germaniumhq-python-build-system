@@ -10,6 +10,7 @@ germaniumBuildSystemPipeline(
             "python-3.6-win32": "germaniumhq/python:3.6-win32",
         ],
         [
+            "python-build-2.7": "germaniumhq/python-build:2.7",
             "python-build-3.6": "germaniumhq/python-build:3.6",
             "python-build-3.7": "germaniumhq/python-build:3.7",
         ]
