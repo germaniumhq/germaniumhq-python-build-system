@@ -21,6 +21,3 @@ ENV PATH="/python/bin:$PATH"
 
 USER germanium
 
-RUN /python/bin/pip install -U pip && \
-    /python/bin/pip install -U wheel
-
