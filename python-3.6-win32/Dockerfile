@@ -12,12 +12,12 @@ ARG PYINSTALLER_VERSION=3.3
 RUN set -x \
     && dpkg --add-architecture i386 \
     && apt-get update -qy \
-    && apt-get install --no-install-recommends -qfy apt-transport-https software-properties-common wget xvfb \
+    && apt-get install --no-install-recommends --allow-unauthenticated -qfy apt-transport-https software-properties-common wget xvfb \
     && wget -nv https://dl.winehq.org/wine-builds/Release.key \
     && apt-key add Release.key \
     && add-apt-repository 'https://dl.winehq.org/wine-builds/ubuntu/' \
     && apt-get update -qy \
-    && apt-get install --no-install-recommends -qfy $WINE_VERSION winbind cabextract \
+    && apt-get install --no-install-recommends --allow-unauthenticated -qfy $WINE_VERSION winbind cabextract \
     && apt-get clean \
     && wget -nv https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
     && chmod +x winetricks \
